@@ -1,1 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TCL Quiz</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f4f4f4; }
+        h1 { color: #333; }
+        .question { margin-bottom: 15px; }
+        button { padding: 10px 20px; margin-top: 20px; }
+    </style>
+</head>
+<body>
 
+<h1>TCL Quiz (40 MCQs)</h1>
+
+<form id="quizForm"></form>
+
+<button onclick="submitQuiz()">Submit</button>
+
+<h2 id="result"></h2>
+
+<script>
+const questions = [
+{q:"TCL stands for?",o:["Tool Command Language","Text Control Language","Terminal Code Language","None"],a:0},
+{q:"TCL script file extension?",o:[".tcl",".sh",".py",".txt"],a:0},
+{q:"Command to print output?",o:["print","echo","puts","display"],a:2},
+{q:"How to assign variable?",o:["set x=5","x=5","set x 5","int x=5"],a:2},
+{q:"Variable access symbol?",o:["$","#","@","&"],a:0},
+{q:"Which is comment?",o:["#","//","--","/*"],a:0},
+{q:"TCL is?",o:["Compiled","Interpreted","Assembly","Machine"],a:1},
+{q:"Command substitution?",o:["[]","()","{}","<>"],a:0},
+{q:"Loop keyword?",o:["for","while","loop","repeat"],a:0},
+{q:"Condition keyword?",o:["if","cond","case","switch"],a:0},
+
+{q:"String length command?",o:["strlen","len","string length","length"],a:2},
+{q:"List creation?",o:["list","array","set","tuple"],a:0},
+{q:"Which returns list length?",o:["llength","len","size","count"],a:0},
+{q:"Index starts from?",o:["0","1","-1","depends"],a:0},
+{q:"Procedure keyword?",o:["func","proc","def","function"],a:1},
+{q:"Global variable keyword?",o:["global","public","extern","var"],a:0},
+{q:"Expression eval?",o:["expr","eval","calc","run"],a:0},
+{q:"Math addition?",o:["expr $a+$b","a+b","add","calc"],a:0},
+{q:"Replace string?",o:["replace","string replace","sub","edit"],a:1},
+{q:"Reverse string?",o:["rev","string reverse","reverse","flip"],a:1},
+
+{q:"Random number?",o:["rand","random","expr rand()","gen"],a:2},
+{q:"Loop until condition?",o:["while","until","for","loop"],a:0},
+{q:"Break loop?",o:["break","exit","stop","end"],a:0},
+{q:"Skip iteration?",o:["continue","skip","pass","next"],a:0},
+{q:"Switch case?",o:["switch","case","if","cond"],a:0},
+{q:"String compare?",o:["==","eq","cmp","compare"],a:1},
+{q:"Greater than?",o:[">","gt","greater","high"],a:1},
+{q:"Less than?",o:["<","lt","low","small"],a:1},
+{q:"Eval command?",o:["eval","run","exec","do"],a:0},
+{q:"Exec command?",o:["exec","run","eval","call"],a:0},
+
+{q:"List index?",o:["lindex","index","listindex","get"],a:0},
+{q:"Append list?",o:["lappend","append","add","push"],a:0},
+{q:"Remove list?",o:["lremove","remove","delete","unset"],a:3},
+{q:"Unset variable?",o:["unset","delete","remove","clear"],a:0},
+{q:"Array creation?",o:["array set","array create","new array","make"],a:0},
+{q:"File open?",o:["open","file","read","load"],a:0},
+{q:"File close?",o:["close","end","stop","exit"],a:0},
+{q:"Read file?",o:["read","scan","input","file"],a:0},
+{q:"Write file?",o:["puts","write","print","echo"],a:0},
+{q:"Exit script?",o:["exit","stop","end","quit"],a:0}
+];
+
+const form = document.getElementById("quizForm");
+
+questions.forEach((q, i) => {
+    let div = document.createElement("div");
+    div.classList.add("question");
+
+    div.innerHTML = `<p>${i+1}. ${q.q}</p>` +
+        q.o.map((opt, j) =>
+            `<label><input type="radio" name="q${i}" value="${j}"> ${opt}</label><br>`
+        ).join("");
+
+    form.appendChild(div);
+});
+
+function submitQuiz() {
+    let score = 0;
+
+    questions.forEach((q, i) => {
+        let ans = document.querySelector(`input[name="q${i}"]:checked`);
+        if (ans && parseInt(ans.value) === q.a) {
+            score++;
+        }
+    });
+
+    document.getElementById("result").innerText =
+        "Score: " + score + " / " + questions.length;
+}
+</script>
+
+</body>
+</html>
